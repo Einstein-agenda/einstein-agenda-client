@@ -4,8 +4,6 @@ import InputCustomizado from './inputCustomizado';
 import ButtonCustomizado from './buttonCustomizado';
 import Dropdown from './Dropdown';
 
-//import PubSub from 'pubsub-js';
-
 class FormularioAutor extends Component {
 
     constructor() {
@@ -90,7 +88,7 @@ class TabelaAutor extends Component {
                     <tbody>
                         {
                             this.props.lista.map(function (agendamento) {
-                                console.log(agendamento.Doctor.name);
+                               
                                 return (
                                     <tr key={agendamento.id}>
                                         <td>{agendamento.id}</td>

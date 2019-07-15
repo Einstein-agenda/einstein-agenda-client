@@ -15,7 +15,7 @@ export default class ConsultasMedicoTabela extends Component {
 
     componentDidMount() {
         $.ajax({
-            url: "http://localhost:3030/agendamentos/medico/2",
+            url: "http://localhost:3030/agendamentos/medico/3",
             dataType: 'json',
             success: function (resposta) {
                 this.setState({ lista: resposta })

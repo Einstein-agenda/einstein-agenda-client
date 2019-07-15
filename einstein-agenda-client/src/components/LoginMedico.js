@@ -32,6 +32,7 @@ export default class Login extends Component {
             })
             .then(token => {
                 localStorage.setItem('auth-token',token);
+                console.log(requestInfo);
                 browserHistory.push('/homeMedico');
             })
             .catch(error => {
@@ -48,15 +49,15 @@ export default class Login extends Component {
                     <form onSubmit={this.envia.bind(this)}>
                         <input placeholder="E-mail" type="text" ref={(input) => this.email = input}/>
                         <input placeholder="Senha" type="password" ref={(input) => this.password = input}/>
-                        <input className="pure-control-group left" type="submit" label="Login" value="Login"/>
+                        <input className="pure-control-group left padding" type="submit" label="Login" value="Login"/>
                         <Link to='/'>
                         <input className="pure-control-group right" type="submit" label="Cadastro" value="Cadastro"/>
                         </Link>
-                        <Link className="pure-control-group" to='/'>
-                            <input  type="submit" value="Voltar"/>
-                        </Link>
-                        
+                                        
                     </form>
+                        <Link to='/'>
+                        <input className="pure-control-group right" type="submit" label="Voltar" value="Voltar"/>
+                        </Link>
                 </div>
             </div>
         );

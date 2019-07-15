@@ -22,7 +22,7 @@ export default class homeMedico extends Component {
               </Link>
             <ul className="pure-menu-list">
               <li className="pure-menu-item">
-                <Link className="pure-menu-link" to='/homeMedico'>
+                <Link className="pure-menu-link" to='/agendaMedico'>
                   Agenda
                 </Link>
               </li>
@@ -37,7 +37,7 @@ export default class homeMedico extends Component {
     
             <div id="main">
               <div className="header">
-                <h1>Suas Consultas</h1>
+                <h1>Agendamento Online</h1>
               </div>
               <br></br>
               <ConsultasMedicoTabela/>

@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import '../css/pure-min.css';
 import '../css/side-menu.css';
 import { Link } from 'react-router';
-import TabelaConsultas from './ConsultasMedicoTabela';
+import AgendaMedicoForm from './AgendaMedicoForm';
 
 
 
-export default class ConsultasMedico extends Component {
+export default class AgendaMedico extends Component {
 
   render() {
     return (
@@ -17,13 +17,13 @@ export default class ConsultasMedico extends Component {
 
         <div id="menu">
           <div className="pure-menu">
-              <Link className="pure-menu-heading" to="/homePaciente">
-                  AGENDAR
+              <Link className="pure-menu-heading" to="/homeMedico">
+                  HOME
               </Link>
             <ul className="pure-menu-list">
               <li className="pure-menu-item">
-                <Link className="pure-menu-link" to='/consultas'>
-                  Consultas
+                <Link className="pure-menu-link" to='/agendaMedico'>
+                  Agenda
                 </Link>
               </li>
               <li className="pure-menu-item">
@@ -40,7 +40,7 @@ export default class ConsultasMedico extends Component {
             <h1>Agendamento Online</h1>
           </div>
           <br></br>
-          <TabelaConsultas/>
+          <AgendaMedicoForm/>
         </div>
       </div>
 
