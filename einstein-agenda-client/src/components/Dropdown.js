@@ -42,12 +42,12 @@ setDoctor(evento) {
 
  
   componentDidMount() {
-    fetch("http://localhost:3030/agendamentos/")
+    fetch("http://localhost:3030/especialidades")
       .then((response) => {
         return response.json();
       })
       .then(data => {
-        let teamsFromApi = data.map(team => { return {value: team.Doctor.specialty, display: team.Doctor.specialty} })
+        let teamsFromApi = data.map(team => { return {value: team.specialty, display: team.specialty} })
         this.setState({ teams: [{value: '', display: '(Buscar por especialidade)'}].concat(teamsFromApi) });
       }).catch(error => {
         console.log(error);

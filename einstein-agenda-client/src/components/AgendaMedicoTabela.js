@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import ButtonCustomizado from './buttonCustomizado';
 
-//import PubSub from 'pubsub-js';
 
 
-export default class ConsultasMedicoTabela extends Component {
+export default class AgendaMedicoTabela extends Component {
 
     constructor() {
         super();
@@ -15,7 +14,7 @@ export default class ConsultasMedicoTabela extends Component {
 
     componentDidMount() {
         $.ajax({
-            url: "http://localhost:3030/agendamentos/medico/3",
+            url: "http://localhost:3030/agendamentos/medico/1",
             dataType: 'json',
             success: function (resposta) {
                 this.setState({ lista: resposta })
@@ -30,12 +29,11 @@ export default class ConsultasMedicoTabela extends Component {
     render() {
         return (
             <div className="content" id="content">
-                <h2>Minhas consultas</h2>
+                <h2>Agendas livres</h2>
                 <table className="pure-table">
                     <thead>
                         <tr>
                             <th>id</th>
-                            <th>Paciente</th>
                             <th>Data</th>
                             <th>Hora</th>
                             <th></th>
@@ -48,7 +46,6 @@ export default class ConsultasMedicoTabela extends Component {
                                 return (
                                     <tr key={agendamento.id}>
                                         <td>{agendamento.id}</td>
-                                        {/* <td>{agendamento.Patient.name}</td> */}
                                         <td>{agendamento.date}</td>
                                         <td>{agendamento.time}</td>
                                         <td><ButtonCustomizado type="submit" label="Desmarcar" /></td>

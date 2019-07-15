@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../css/pure-min.css';
 import '../css/side-menu.css';
 import { Link } from 'react-router';
-import AgendaMedicoForm from './AgendaMedicoForm';
+import AgendaMedicoBox from './AgendaMedicoBox';
 
 
 
@@ -40,7 +40,7 @@ export default class AgendaMedico extends Component {
             <h1>Agendamento Online</h1>
           </div>
           <br></br>
-          <AgendaMedicoForm/>
+            <AgendaMedicoBox/>
         </div>
       </div>
 

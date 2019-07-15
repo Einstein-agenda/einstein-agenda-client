@@ -72,7 +72,7 @@ class TabelaAutor extends Component {
                 <h2>Horários Disponíveis</h2>
                 
                 <Dropdown/>
-               
+                <br></br>
                
                 <table className="pure-table">
                     <thead>
@@ -80,8 +80,8 @@ class TabelaAutor extends Component {
                             <th>id</th>
                             <th>Doutor(a)</th>
                             <th>Especialidade</th>
-                            <th>Hora</th>
                             <th>Data</th>
+                            <th>Hora</th>
                             <th></th>
                         </tr>
                     </thead>
