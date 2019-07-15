@@ -6,6 +6,51 @@ import Dropdown from './Dropdown';
 
 //import PubSub from 'pubsub-js';
 
+
+class TabelaAutor extends Component {
+    
+    render() {
+        return (
+            <div>
+                <h2>Horários Disponíveis</h2>
+                <form className="pure-form pure-form-aligned">
+                <Dropdown/>
+                <ButtonCustomizado type="submit" label="Buscar"/>
+                </form>
+                <table className="pure-table">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Doutor(a)</th>
+                            <th>Especialidade</th>
+                            <th>Hora</th>
+                            <th>Data</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            this.props.lista.map(function (agendamento) {
+                                console.log(agendamento.doctor);
+                                return (
+                                    <tr key={agendamento.id}>
+                                        <td>{agendamento.id}</td>
+                                        <td>{agendamento.doctor}</td>
+                                        <td>{agendamento.doctor}</td>
+                                        <td>{agendamento.date}</td>
+                                        <td>{agendamento.time}</td>
+                                        <td><ButtonCustomizado type="submit" label="Agendar" /></td>
+                                    </tr>
+                                );
+                            })
+                        }
+                    </tbody>
+                </table>
+            </div>
+        );
+    }
+}
+
 class FormularioAutor extends Component {
 
     constructor() {
@@ -65,51 +110,6 @@ class FormularioAutor extends Component {
         );
     }
 }
-
-class TabelaAutor extends Component {
-
-    render() {
-        return (
-            <div>
-                <h2>Horários Disponíveis</h2>
-                
-                <Dropdown/>
-               
-               
-                <table className="pure-table">
-                    <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>Doutor(a)</th>
-                            <th>Especialidade</th>
-                            <th>Hora</th>
-                            <th>Data</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            this.props.lista.map(function (agendamento) {
-                                console.log(agendamento.Doctor.name);
-                                return (
-                                    <tr key={agendamento.id}>
-                                        <td>{agendamento.id}</td>
-                                        <td>{agendamento.Doctor.name}</td>
-                                        <td>{agendamento.Doctor.specialty}</td>
-                                        <td>{agendamento.date}</td>
-                                        <td>{agendamento.time}</td>
-                                        <td><ButtonCustomizado type="submit" label="Agendar" /></td>
-                                    </tr>
-                                );
-                            })
-                        }
-                    </tbody>
-                </table>
-            </div>
-        );
-    }
-}
-
 export default class AutorBox extends Component {
 
     constructor() {
@@ -137,7 +137,7 @@ export default class AutorBox extends Component {
             <div className="content" id="content">
                 
                 <TabelaAutor lista={this.state.lista}/>
-                {/* <FormularioAutor callbackAtualizaListagem={this.atualizaListagem}/> */}
+                <FormularioAutor callbackAtualizaListagem={this.atualizaListagem}/>
             </div>
         );
     }

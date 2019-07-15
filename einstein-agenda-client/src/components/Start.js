@@ -9,10 +9,10 @@ export default class Start extends Component {
     render() {
         return (
             <div className="container">
+                <img src="../img/einstein.jpeg"></img>
                 <div className="login-box">
-                    <h1 className="header-logo">Área de acesso restrito!</h1>
-                    <div className="align">
-                            <h3 className="header-logo"> Você é um:</h3>
+                    <h1 className='header-logo'>Área de acesso restrito!</h1>
+                    <div className='content'>
                             <ContainedButton /> 
                         </div>
                     </div>

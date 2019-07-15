@@ -6,6 +6,8 @@ import PacienteLogin from './components/LoginPaciente';
 import MedicoLogin from './components/LoginMedico';
 import HomeMedico from './components/HomeMedico';
 import homePaciente from './components/HomePaciente';
+import consultasPaciente from './components/ConsultasPaciente';
+import consultasMedico from './components/ConsultasMedico';
 import * as serviceWorker from './serviceWorker';
 import { Router, Route, browserHistory } from 'react-router';
 import Start from './components/Start';
@@ -25,6 +27,8 @@ ReactDOM.render(
             <Route path="/logout" component={Logout} />
             <Route path="/homeMedico" component={HomeMedico} onEnter={verificaAutenticacao} />
             <Route path="/homePaciente" component={homePaciente} onEnter={verificaAutenticacao} />
+            <Route path="/consultasPaciente" component={consultasPaciente} onEnter={verificaAutenticacao} />
+            <Route path="/consultasMedico" component={consultasMedico} onEnter={verificaAutenticacao} />
         </Router>
     )
     , document.getElementById('root'));

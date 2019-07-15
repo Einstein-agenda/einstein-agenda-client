@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import '../css/pure-min.css';
 import '../css/side-menu.css';
-import AutorBox from './Autor';
 import { Link } from 'react-router';
+import TabelaConsultas from './ConsultasPacienteTabela';
 
 
 
-export default class HomePaciente extends Component {
+export default class ConsultasPacientes extends Component {
 
   render() {
     return (
@@ -22,7 +22,7 @@ export default class HomePaciente extends Component {
               </Link>
             <ul className="pure-menu-list">
               <li className="pure-menu-item">
-                <Link className="pure-menu-link" to='/consultasPaciente'>
+                <Link className="pure-menu-link" to='/consultas'>
                   Consultas
                 </Link>
               </li>
@@ -40,7 +40,7 @@ export default class HomePaciente extends Component {
             <h1>Agendamento Online</h1>
           </div>
           <br></br>
-          <AutorBox />
+          <TabelaConsultas/>
         </div>
       </div>
 

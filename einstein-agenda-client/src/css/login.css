@@ -3,13 +3,17 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
-    background: rgb(199, 198, 198);
-    padding: 1em;
+    background: rgba(199, 198, 198, 0.9);
+    padding: 1.5em;
     align-items: center;
+    border-radius: 7px;
 }
 
 .header-logo{
     align-items: center;
+    color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 18px;
 }
 
 .align{
@@ -23,12 +27,15 @@
     border-radius: 5px;
     margin: 1em auto;
     border: 1px solid black;
+    padding: 5px;
 }
 
 .login-box input[type='submit'] {
     background: #3897f0;
     border-color: #3897f0;
-    color: white;    
+    color: white;  
+    padding: 8px;  
+    margin: 5px;
 }
 
 .container {
@@ -39,5 +46,24 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    background-blend-mode: color-burn
+    background-image: url("../img/einstein.jpg");
+    background-size: cover;
+}
+
+.body{
+    background-image: url("../img/einstein.jpg");
+    background-size: cover;
+}
+
+.left{
+   float: left;
+}
+.right{
+   float: right;
+}
+
+.margin{
+    margin: 5px;
+    padding-left: 5px; 
+    padding-right: 5px; 
 }

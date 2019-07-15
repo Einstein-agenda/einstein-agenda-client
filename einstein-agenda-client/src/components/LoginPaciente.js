@@ -20,7 +20,7 @@ export default class Login extends Component {
             })
         };
 
-        fetch('http://localhost:3030/pacienteLogin',requestInfo)
+        fetch("http://localhost:3030/pacienteLogin?X-AUTO-TOKEN='${localStorage.getItem('auth-token')}'",requestInfo)
             .then(response => {
                 if(response.ok) {
                     return response.text();
@@ -39,17 +39,22 @@ export default class Login extends Component {
 
     render(){
         return (
-            <div className="login-box">
-                <h2 className="header-logo">LOGIN PACIENTE</h2>
-                <span>{this.state.msg}</span>
-                <form onSubmit={this.envia.bind(this)}>
-                    <input placeholder="E-mail" type="text" ref={(input) => this.email = input}/>
-                    <input placeholder="Senha" type="password" ref={(input) => this.password = input}/>
-                    <input type="submit" value="Login"/>
-                    <Link to='/'>
-                        <input type="submit" value="Voltar"/>
-                    </Link>
-                </form>
+            <div className="container">
+                <div className="login-box">
+                    <h2 className="header-logo">LOGIN PACIENTE</h2>
+                    <span>{this.state.msg}</span>
+                    <form onSubmit={this.envia.bind(this)}>
+                        <input placeholder="E-mail" type="text" ref={(input) => this.email = input}/>
+                        <input placeholder="Senha" type="password" ref={(input) => this.password = input}/>
+                        <input className="pure-control-group left" type="submit" label="Login" value="Login"/>
+                        <Link to='/'>
+                        <input className="pure-control-group right" type="submit" label="Cadastro" value="Cadastro"/>
+                        </Link>
+                        <Link className="pure-control-group" to='/'>
+                            <input  type="submit" value="Voltar"/>
+                        </Link>
+                    </form>
+                </div>
             </div>
         );
     }

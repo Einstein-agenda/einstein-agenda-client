@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import '../css/pure-min.css';
 import '../css/side-menu.css';
-import AutorBox from './Autor';
 import {Link} from 'react-router';
+import ConsultasMedicoTabela from './ConsultasMedicoTabela';
 
-export default class ButtonCustomizado extends Component {
+
+
+export default class homeMedico extends Component {
 
     render() {
         return (
@@ -38,7 +40,7 @@ export default class ButtonCustomizado extends Component {
                 <h1>Suas Consultas</h1>
               </div>
               <br></br>
-              <AutorBox />
+              <ConsultasMedicoTabela/>
             </div>
           </div>
           
