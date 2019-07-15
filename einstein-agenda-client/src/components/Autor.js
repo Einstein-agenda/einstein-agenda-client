@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import InputCustomizado from './inputCustomizado';
 import ButtonCustomizado from './buttonCustomizado';
+
 //import PubSub from 'pubsub-js';
 
 class FormularioAutor extends Component {
@@ -50,7 +51,7 @@ class FormularioAutor extends Component {
         return (
             
             <div className="pure-form pure-form-aligned">
-                
+                <h2>Agendar</h2>
                 <form className="pure-form pure-form-aligned" onSubmit={this.enviaForm.bind(this)} method="POST">
                     <InputCustomizado id="id_patient" type="hidden" name="id" value={this.setId} onChange={this.setIdPatient} />
                     <InputCustomizado id="nome" type="text" name="nome" value={this.state.nome} onChange={this.setNome} label="Nome" />
@@ -69,25 +70,30 @@ class TabelaAutor extends Component {
     render() {
         return (
             <div>
+                <h2>Horários Disponíveis</h2>
                 <table className="pure-table">
                     <thead>
                         <tr>
                             <th>id</th>
-                            <th>Data</th>
+                            <th>Doutor(a)</th>
+                            <th>Especialidade</th>
                             <th>Hora</th>
                             <th>Data</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             this.props.lista.map(function (autor) {
-                                const patient = autor.patient;
+                                console.log(autor.doctor);
                                 return (
                                     <tr key={autor.id}>
                                         <td>{autor.id}</td>
+                                        <td>{autor.doctor}</td>
+                                        <td>{autor.doctor}</td>
                                         <td>{autor.date}</td>
                                         <td>{autor.time}</td>
-                                        <td>{patient}</td>
+                                        <td><ButtonCustomizado type="submit" label="Agendar" /></td>
                                     </tr>
                                 );
                             })
@@ -124,8 +130,9 @@ export default class AutorBox extends Component {
     render() {
         return (
             <div className="content" id="content">
-                <FormularioAutor callbackAtualizaListagem={this.atualizaListagem}/>
+                
                 <TabelaAutor lista={this.state.lista}/>
+                <FormularioAutor callbackAtualizaListagem={this.atualizaListagem}/>
             </div>
         );
     }

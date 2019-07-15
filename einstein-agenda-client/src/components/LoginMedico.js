@@ -40,7 +40,7 @@ export default class Login extends Component {
     render(){
         return (
             <div className="login-box">
-                <h2 className="header-logo">Login Médico</h2>
+                <h2 className="header-logo">LOGIN MÉDICO</h2>
                 <span>{this.state.msg}</span>
                 <form onSubmit={this.envia.bind(this)}>
                     <input placeholder="E-mail" type="text" ref={(input) => this.email = input}/>
