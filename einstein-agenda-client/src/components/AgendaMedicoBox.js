@@ -8,13 +8,13 @@ export default class AgendaMedicoForm extends Component {
 
     constructor() {
         super();
-        this.state = { lista: [], date: '', time: ''};
+        this.state = { lista: [], date: '', time: '' };
         this.enviaForm = this.enviaForm.bind(this);
         this.setDate = this.setDate.bind(this);
         this.setTime = this.setTime.bind(this);
         this.atualizaListagem = this.atualizaListagem.bind(this);
         this.userId = localStorage.getItem('userId');
-        
+
     }
 
 
@@ -27,13 +27,11 @@ export default class AgendaMedicoForm extends Component {
             }.bind(this)
         });
 
-        PubSub.subscribe('atualiza-lista-autores',function(topico,novaLista){
-            this.setState({lista:novaLista});
-          }.bind(this));
     }
 
     atualizaListagem(novalista) {
-        this.setState({ lista: novalista });
+        this.setState({ lista: [novalista] });
+        console.log(this.state.lista);
     }
 
 
@@ -44,12 +42,10 @@ export default class AgendaMedicoForm extends Component {
             contentType: 'application/json',
             dataType: 'json',
             type: 'post',
-            data: JSON.stringify({ id_doctor:this.userId, date: this.state.date, time: this.state.time }),
+            data: JSON.stringify({ id_doctor: this.userId, date: this.state.date, time: this.state.time }),
             success: function (novaListagem) {
-                console.log(novaListagem);
                 console.log("enviado com sucesso");
-                this.setState({date:'', time:''});
-                PubSub.publish('atualiza-lista-autores',novaListagem);  
+                this.setState({ date: '', time: '' });
             }.bind(this),
             error: function (resposta) {
                 console.log("erroooo");
@@ -58,14 +54,14 @@ export default class AgendaMedicoForm extends Component {
         console.log('Dados sendo enviados')
     }
 
-    exclui(evento) {
+    excluido(evento) {
         evento.preventDefault();
         $.ajax({
             url: "https://albert-einstein-agenda-api.herokuapp.com/agendamentos/apagar",
             contentType: 'application/json',
-            type:'post',
+            type: 'post',
             dataType: 'json',
-            data: {id:evento},
+            data: { id: evento },
             success: function (novaListagem) {
                 console.log("apagado com sucesso");
                 this.setDate({ lista: novaListagem });
@@ -75,21 +71,17 @@ export default class AgendaMedicoForm extends Component {
             }
         })
     }
-    
 
-    
-    excluido(event) {
-        event.preventDefault();
 
-        const requestInfo = {
-            method: 'DELELETE',
-            body: JSON.stringify({ id: this.id }),
-            headers: new Headers({
-                'Content-type': 'application/json'
-            })
-        };
 
-        fetch("https://albert-einstein-agenda-api.herokuapp.com/agendamentos/1" , requestInfo)
+    exclui(agendamento_id) {
+       
+
+        fetch("https://albert-einstein-agenda-api.herokuapp.com/agendamentos/" + agendamento_id , {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: agendamento_id})
+        })
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -127,10 +119,10 @@ export default class AgendaMedicoForm extends Component {
                             <InputCustomizado id="id_doctor" type="hidden" name="id_doctor" value={this.userId} />
                             <InputCustomizado id="date" type="date" name="date" value={this.state.date} onChange={this.setDate} label="Data" />
                             <InputCustomizado id="time" type="time" name="time" value={this.state.time} onChange={this.setTime} label="Hora" />
-                            <ButtonCustomizado  type="submit" label="Gravar" />
+                            <ButtonCustomizado type="submit" label="Gravar" />
                         </form>
                     </div>
-                <br></br>
+                    <br></br>
                 </div>
                 <div className="content" id="content">
                     <h2>Minhas agendas livres</h2>
@@ -152,7 +144,7 @@ export default class AgendaMedicoForm extends Component {
                                             <td>{agendamento.date}</td>
                                             <td>{agendamento.time}</td>
                                             <td>
-                                               <form onSubmit={()=>this.exclui(agendamento.id)}> <ButtonCustomizado value={agendamento.id}  type="submit" label="Excluir" /></form>
+                                             <ButtonCustomizado onClick={() => this.exclui(agendamento.id)} value={agendamento.id} type="submit" label="Excluir" />
                                             </td>
                                         </tr>
                                     );

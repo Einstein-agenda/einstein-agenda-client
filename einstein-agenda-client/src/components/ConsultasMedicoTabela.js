@@ -10,6 +10,7 @@ export default class ConsultasMedicoTabela extends Component {
         this.state = { lista: [] };
         this.atualizaListagem = this.atualizaListagem.bind(this);
         this.userId = localStorage.getItem('userId');
+    
     }
 
 
@@ -23,16 +24,21 @@ export default class ConsultasMedicoTabela extends Component {
         });
     }
 
-    enviaForm(evento) {
+
+
+    desmarca(evento) {
+        console.log(evento);
+        console.log(evento.target);
         evento.preventDefault();
         $.ajax({
-            url: "http://cdc-react.herokuapp.com/api/autores",
+            url: "https://albert-einstein-agenda-api.herokuapp.com/" + evento.target,
             contentType: 'application/json',
             dataType: 'json',
-            type: 'post',
-            data: JSON.stringify({ nome: this.state.nome, date: this.state.date, time: this.state.time }),
+            type: 'put',
+            data: JSON.stringify({ id: evento.target, id_patient: null }),
             success: function (novaListagem) {
-                //PubSub.publish(novaListagem);
+                this.atualizaListagem(novaListagem);
+                console.log('Consulta desmarcada com sucesso');
             }.bind(this),
             error: function (resposta) {
                 console.log("erroooo");
@@ -62,16 +68,19 @@ export default class ConsultasMedicoTabela extends Component {
                     <tbody>
                         {
                             this.state.lista.map(function (agendamento) {
-                                
-                                
+                        
                                 return (
                                     <tr key={agendamento.id}>
                                         <td>{agendamento.id}</td>
                                         <td>{agendamento.Patient.name}</td>
                                         <td>{agendamento.date}</td>
                                         <td>{agendamento.time}</td>
-                                        
-                                        <td><form onSubmit={()=>this.enviaForm(agendamento.id)}><ButtonCustomizado value={agendamento.id}  type="submit" label="Desmarcar" /></form></td>
+
+                                        <td>
+                                            {/* <button type="submit" onClick={() => this.desmarca(agendamento.id).bind(this)} value={agendamento.id}/> */}
+                                                <ButtonCustomizado onClick={() => this.desmarca(agendamento.id)} value={agendamento.id} type="submit" label="Desmarcar" />
+                                            
+                                        </td>
                                     </tr>
                                 );
                             })
