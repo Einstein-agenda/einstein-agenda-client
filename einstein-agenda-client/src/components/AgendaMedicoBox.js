@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import InputCustomizado from './inputCustomizado';
 import ButtonCustomizado from './buttonCustomizado';
-import PubSub from 'pubsub-js';
 
 export default class AgendaMedicoForm extends Component {
 
@@ -17,7 +16,6 @@ export default class AgendaMedicoForm extends Component {
 
     }
 
-
     componentDidMount() {
         $.ajax({
             url: "https://albert-einstein-agenda-api.herokuapp.com/agendamentos/medico/" + this.userId,
@@ -26,7 +24,6 @@ export default class AgendaMedicoForm extends Component {
                 this.setState({ lista: resposta })
             }.bind(this)
         });
-
     }
 
     atualizaListagem(novalista) {

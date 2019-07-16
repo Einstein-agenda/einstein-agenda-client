@@ -20,7 +20,7 @@ export default class Login extends Component {
             })
         };
 
-        fetch("https://albert-einstein-agenda-api.herokuapp.com/medicoLogin?X-AUTO-TOKEN='${localStorage.getItem('auth-token')}'", requestInfo)
+        fetch("https://albert-einstein-agenda-api.herokuapp.com/pacienteLogin", requestInfo)
             .then(response => {
                 if (response.ok) {
                     return response.json();
@@ -33,8 +33,7 @@ export default class Login extends Component {
             })
             .then(token => {
                 localStorage.setItem('auth-token', token);
-                console.log(requestInfo);
-                browserHistory.push('/homeMedico');
+                browserHistory.push('/homePaciente');
             })
             .catch(error => {
                 this.setState({ msg: error.message });
@@ -45,15 +44,19 @@ export default class Login extends Component {
         return (
             <div className="container">
                 <div className="login-box">
-                    <h2 className="header-logo">LOGIN MÉDICO</h2>
+                    <h2 className="header-logo">LOGIN PACIENTE</h2>
                     <span>{this.state.msg}</span>
                     <form onSubmit={this.envia.bind(this)}>
                         <input placeholder="E-mail" type="text" ref={(input) => this.email = input} />
                         <input placeholder="Senha" type="password" ref={(input) => this.password = input} />
-                        <input className="pure-control-group left padding" type="submit" label="Login" value="Login" />
-                        <Link to='/medicoCadastro'><input className="pure-control-group right" type="submit" label="Cadastro" value="Cadastro" /></Link>
-                     </form>
-                    <Link to='/'><input className="pure-control-group right" type="submit" label="Voltar" value="Voltar" /> </Link>
+                        <input className="pure-control-group left" type="submit" label="Login" value="Login" />
+                        <Link to='/'>
+                            <input className="pure-control-group right" type="submit" label="Cadastro" value="Cadastro" />
+                        </Link>
+                        <Link className="pure-control-group" to='/'>
+                            <input type="submit" value="Voltar" />
+                        </Link>
+                    </form>
                 </div>
             </div>
         );
