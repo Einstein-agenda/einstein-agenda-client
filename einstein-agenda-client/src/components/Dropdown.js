@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
-import ButtonCustomizado from './buttonCustomizado';
-
 
 
 export default class FavouriteTeam extends Component {
@@ -21,7 +19,7 @@ export default class FavouriteTeam extends Component {
 enviaFormBusca(evento) {
     evento.preventDefault();
     $.ajax({
-        url: "http://localhost:3030/agendamentos/'${this.state.selectedTeam}'",
+        url: "https://albert-einstein-agenda-api.herokuapp.com/" + this.state.selectedTeam,
         contentType: 'application/json',
         dataType: 'json',
         type: 'get',
@@ -42,7 +40,7 @@ setDoctor(evento) {
 
  
   componentDidMount() {
-    fetch("http://localhost:3030/especialidades")
+    fetch("https://albert-einstein-agenda-api.herokuapp.com/especialidades")
       .then((response) => {
         return response.json();
       })

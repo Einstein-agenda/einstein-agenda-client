@@ -118,7 +118,7 @@ export default class AutorBox extends Component {
 
     componentDidMount() {
         $.ajax({
-            url: "http://localhost:3030/agendamentos",
+            url: "https://albert-einstein-agenda-api.herokuapp.com/agendamentos",
             dataType: 'json',
             success: function (resposta) {
                 this.setState({ lista: resposta })

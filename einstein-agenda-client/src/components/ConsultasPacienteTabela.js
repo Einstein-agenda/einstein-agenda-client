@@ -12,28 +12,29 @@ export default class TabelaConsultas extends Component {
         this.atualizaListagem = this.atualizaListagem.bind(this);
         this.setIdScheduling = this.setIdScheduling.bind(this);
         this.enviaForm = this.enviaForm.bind(this);
+        this.userId = localStorage.getItem('userId');
     }
 
     enviaForm(evento) {
-        // evento.preventDefault();
-        // $.ajax({
-        //     url: "http://localhost:3030/agendamentos/1",
-        //     contentType: 'application/json',
-        //     dataType: 'json',
-        //     type: 'put',
-        //     data: JSON.stringify({ id: this.state.id, id_patient: null}),
-        //     success: function (novaListagem) {
-        //         //PubSub.publish(novaListagem);
-        //     }.bind(this),
-        //     error: function (resposta) {
-        //         console.log("erroooo");
-        //     }
-        // })
+        evento.preventDefault();
+        $.ajax({
+            url: "https://albert-einstein-agenda-api.herokuapp.com/agendamentos/1",
+            contentType: 'application/json',
+            dataType: 'json',
+            type: 'post',
+            data: JSON.stringify({ id: this.state.id, id_patient: null}),
+            success: function (novaListagem) {
+                this.setDate({ lista: novaListagem });
+            }.bind(this),
+            error: function (resposta) {
+                console.log("erroooo");
+            }
+        })
         console.log('Dados ssendo enviados')
     }
     componentDidMount() {
         $.ajax({
-            url: "http://localhost:3030/agendamentos/paciente/2",
+            url: "https://albert-einstein-agenda-api.herokuapp.com/agendamentos/paciente/" + this.userId,
             dataType: 'json',
             success: function (resposta) {
                 this.setState({ lista: resposta })
@@ -77,9 +78,8 @@ export default class TabelaConsultas extends Component {
                                         <td>{agendamento.date}</td>
                                         <td>{agendamento.time}</td>
                                         <td>
-                                            <ButtonCustomizado type="submit" label="Desmarcar" value={agendamento.id}/>
-                                        {/* <form onSubmit={this.enviaForm.bind(this)} method='PUT'>
-                                        </form> */}
+                                            <ButtonCustomizado onClick={()=>this.enviaForm(agendamento.id)} type="submit" label="Desmarcar"/>
+                                       
                                         </td>
                                     </tr>
                                 );

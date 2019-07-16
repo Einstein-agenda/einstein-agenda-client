@@ -14,7 +14,7 @@ export default class AgendaMedicoTabela extends Component {
 
     componentDidMount() {
         $.ajax({
-            url: "http://localhost:3030/agendamentos/medico/1",
+            url: "https://albert-einstein-agenda-api.herokuapp.com/agendamentos/medico/1",
             dataType: 'json',
             success: function (resposta) {
                 this.setState({ lista: resposta })
