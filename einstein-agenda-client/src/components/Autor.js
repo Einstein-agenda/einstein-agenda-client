@@ -4,27 +4,29 @@ import InputCustomizado from './inputCustomizado';
 import ButtonCustomizado from './buttonCustomizado';
 import Dropdown from './Dropdown';
 
-class FormularioAutor extends Component {
+class DropDown extends Component {
 
     constructor() {
         super();
-        this.state = { nome: '', email: '', senha: '' };
+        this.state = { specialty: ''};
         this.enviaForm = this.enviaForm.bind(this);
-        this.setIdPatient = this.setIdPatient.bind(this);
-        this.setDate = this.setDate.bind(this);
-        this.setTime = this.setTime.bind(this);
+        this.setSpecialty = this.setSpecialty.bind(this);
     }
 
-    enviaForm(evento) {
+    setSpecialty(evento) {
+        this.setState({ specialty: evento.target.value });
+    }
+
+    enviaFormBusca(evento) {
         evento.preventDefault();
         $.ajax({
-            url: "http://cdc-react.herokuapp.com/api/autores",
+            url: "https://albert-einstein-agenda-api.herokuapp.com/" + this.state.selectedTeam,
             contentType: 'application/json',
             dataType: 'json',
-            type: 'post',
-            data: JSON.stringify({ nome: this.state.nome, date: this.state.date, time: this.state.time }),
-            success: function (novaListagem) {
-                //PubSub.publish(novaListagem);
+            type: 'get',
+            data: JSON.stringify({ id_doctor: this.state.selectedTeam}),
+            success: function(resposta) {
+              
             }.bind(this),
             error: function (resposta) {
                 console.log("erroooo");
@@ -33,29 +35,29 @@ class FormularioAutor extends Component {
         console.log('Dados ssendo enviados')
     }
 
-    setIdPatient(evento) {
-        this.setState({ id_patient: evento.target.value });
-    }
+    componentDidMount() {
+        fetch("https://albert-einstein-agenda-api.herokuapp.com/especialidades")
+          .then((response) => {
+            return response.json();
+          })
+          .then(data => {
+            let teamsFromApi = data.map(team => { return {value: team.specialty, display: team.specialty} })
+            this.setState({ teams: [{value: '', display: '(Buscar por especialidade)'}].concat(teamsFromApi) });
+          }).catch(error => {
+            console.log(error);
+          });
+      }
 
-    setDate(evento) {
-        this.setState({ date: evento.target.value });
-    }
-
-    setTime(evento) {
-        this.setState({ time: evento.target.value });
-    }
-
-
+   
     render() {
         return (
             
             <div className="pure-form pure-form-aligned">
                 <h2>Agendar</h2>
                 <form className="pure-form pure-form-aligned" onSubmit={this.enviaForm.bind(this)} method="POST">
-                    <InputCustomizado id="id_patient" type="hidden" name="id" value={this.setId} onChange={this.setIdPatient} />
-                    <InputCustomizado id="nome" type="text" name="nome" value={this.state.nome} onChange={this.setNome} label="Nome" />
-                    <InputCustomizado id="date" type="date" name="date" value={this.state.date} onChange={this.setDate} label="Data" />
-                    <InputCustomizado id="time" type="time" name="time" value={this.state.time} onChange={this.setTime} label="Hora" />
+                    <select name="specialty" onChange={this.setSpecialty} >
+                        <option value="">Busca por Especialidade</option>
+                    </select>
                     <ButtonCustomizado type="submit" label="Gravar" />
                 </form>
             </div>
@@ -134,6 +136,7 @@ export default class AutorBox extends Component {
         return (
             <div className="content" id="content">
                 
+                {/* <DropDown/> */}
                 <TabelaAutor lista={this.state.lista}/>
                 {/* <FormularioAutor callbackAtualizaListagem={this.atualizaListagem}/> */}
             </div>

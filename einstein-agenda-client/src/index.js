@@ -11,6 +11,7 @@ import agendasMedico from './components/AgendaMedico';
 import * as serviceWorker from './serviceWorker';
 import { Router, Route, browserHistory } from 'react-router';
 import Start from './components/Start';
+import CadastroMedico from './components/CadastroMedico'
 
 function verificaAutenticacao(nextState, replace){
     if(localStorage.getItem('auth-token') === null){
@@ -24,6 +25,7 @@ ReactDOM.render(
             <Route path="/" component={Start} />
             <Route path="/pacienteLogin" component={PacienteLogin} />
             <Route path="/medicoLogin" component={MedicoLogin} />
+            <Route path="/medicoCadastro" component={CadastroMedico} />
             <Route path="/logout" component={Logout} />
             <Route path="/homeMedico" component={HomeMedico} onEnter={verificaAutenticacao} />
             <Route path="/homePaciente" component={homePaciente} onEnter={verificaAutenticacao} />
